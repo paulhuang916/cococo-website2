@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>廣告 Advertising — Cococo.image</title>
+<link rel="stylesheet" href="../style.css">
+<style>
+:root { --cat-accent: #ff4d1c; }
+.page-label { color: var(--cat-accent); }
+.page-label::before { background: var(--cat-accent); }
+.page-header-bg { background: radial-gradient(ellipse at 80% 50%, color-mix(in srgb, #ff4d1c 12%, transparent) 0%, transparent 60%); }
+.page-title span { color: var(--cat-accent); }
+
+.works-section { padding: 60px 48px 120px; max-width: 1400px; margin: 0 auto; }
+.works-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 24px; }
+.work-card {
+  background: var(--mid);
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid rgba(245,240,232,0.07);
+  transition: border-color 0.35s, transform 0.4s;
+  cursor: none;
+}
+.work-card:hover { border-color: var(--cat-accent); transform: translateY(-5px); }
+.work-card-img {
+  aspect-ratio: 4/3;
+  background: #161616;
+  position: relative;
+  overflow: hidden;
+}
+.work-card-placeholder {
+  position: absolute; inset: 0;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  gap: 10px;
+  color: rgba(245,240,232,0.2);
+}
+.ph-icon { font-size: 36px; }
+.ph-text { font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; }
+.work-card-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(10,10,10,0.85) 0%, transparent 60%);
+  padding: 20px;
+  display: flex; align-items: flex-end;
+  opacity: 0; transition: opacity 0.35s;
+}
+.work-card:hover .work-card-overlay { opacity: 1; }
+.work-card-cat { font-size: 10px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--cat-accent); }
+.work-card-info { padding: 22px 24px; display: flex; gap: 18px; align-items: flex-start; }
+.work-card-num { font-family: var(--font-display); font-size: 38px; line-height: 1; color: rgba(245,240,232,0.1); flex-shrink: 0; padding-top: 2px; }
+.work-card-name { font-family: var(--font-serif); font-size: 20px; font-style: italic; margin-bottom: 4px; }
+.work-card-name-en { font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(245,240,232,0.4); margin-bottom: 10px; }
+.work-card-client { font-size: 12px; color: rgba(245,240,232,0.35); letter-spacing: 0.08em; }
+
+.cat-nav {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 36px 48px;
+  border-top: 1px solid rgba(245,240,232,0.08);
+  background: var(--mid);
+  max-width: 100%;
+}
+.nav-btn {
+  display: inline-flex; align-items: center; gap: 10px;
+  text-decoration: none; color: rgba(245,240,232,0.55);
+  font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase;
+  padding: 14px 28px;
+  border: 1px solid rgba(245,240,232,0.1);
+  border-radius: 100px;
+  transition: border-color 0.3s, color 0.3s, background 0.3s;
+}
+.nav-btn:hover { border-color: var(--cat-accent); color: var(--cat-accent); background: rgba(255,255,255,0.03); }
+
+.back-section { padding: 36px 48px 0; max-width: 1400px; margin: 0 auto; }
+
+@media (max-width: 900px) {
+  .works-section, .back-section { padding-left: 24px; padding-right: 24px; }
+  .works-grid { grid-template-columns: 1fr 1fr; }
+  .cat-nav { padding: 28px 24px; flex-wrap: wrap; gap: 12px; }
+}
+@media (max-width: 560px) {
+  .works-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+<div class="cursor" id="cursor"></div>
+
+<nav>
+  <a href="../index.html" class="logo">cococo<span>.</span>image</a>
+  <ul>
+    <li><a href="../index.html#about">關於 About</a></li>
+    <li><a href="../index.html#services">服務 Services</a></li>
+    <li class="nav-works-toggle">
+      <a href="index.html" class="active">作品 Works ▾</a>
+      <div class="dropdown">
+        <a href="advertising.html">廣告 Advertising</a>
+        <a href="graphic.html">平面 Graphic</a>
+        <a href="documentary.html">紀實 Documentary</a>
+        <a href="branding.html">品牌 Branding</a>
+        <a href="product.html">產品 Product</a>
+      </div>
+    </li>
+    <li><a href="../index.html#contact">聯絡 Contact</a></li>
+
+  </ul>
+</nav>
+
+<div class="page-header">
+  <div class="page-header-bg"></div>
+  <div class="page-header-grid"></div>
+  <div class="page-label">01 · Works Category</div>
+  <h1 class="page-title">廣告<br><span>ADVERTISING</span></h1>
+  <p class="page-subtitle">商業廣告作品，打造具有視覺衝擊力的影像，提升品牌知名度與市場影響力。<br><em style="color:rgba(245,240,232,0.35);font-style:italic">Commercial advertising works crafted to captivate audiences and amplify brand presence.</em></p>
+</div>
+
+<div class="works-section">
+  <div class="back-btn-wrap" style="margin-bottom:48px">
+    <a href="index.html" class="back-btn">返回作品總覽 Back to Works</a>
+  </div>
+  <div class="works-grid">
+    <div class="work-card reveal">
+      <div class="work-card-img">
+        <div class="work-card-placeholder">
+          <div class="ph-icon">🖼</div>
+          <div class="ph-text">上傳圖片</div>
+        </div>
+        <div class="work-card-overlay">
+          <div class="work-card-cat">商業廣告 · 視覺設計</div>
+        </div>
+      </div>
+      <div class="work-card-info">
+        <div class="work-card-num">01</div>
+        <div>
+          <div class="work-card-name">品牌形象廣告</div>
+          <div class="work-card-name-en">Brand Campaign</div>
+          <div class="work-card-client">客戶 Client — 客戶 A</div>
+        </div>
+      </div>
+    </div>
+    <div class="work-card reveal">
+      <div class="work-card-img">
+        <div class="work-card-placeholder">
+          <div class="ph-icon">🖼</div>
+          <div class="ph-text">上傳圖片</div>
+        </div>
+        <div class="work-card-overlay">
+          <div class="work-card-cat">商業廣告 · 攝影</div>
+        </div>
+      </div>
+      <div class="work-card-info">
+        <div class="work-card-num">02</div>
+        <div>
+          <div class="work-card-name">產品上市推廣</div>
+          <div class="work-card-name-en">Product Launch</div>
+          <div class="work-card-client">客戶 Client — 客戶 B</div>
+        </div>
+      </div>
+    </div>
+    <div class="work-card reveal">
+      <div class="work-card-img">
+        <div class="work-card-placeholder">
+          <div class="ph-icon">🖼</div>
+          <div class="ph-text">上傳圖片</div>
+        </div>
+        <div class="work-card-overlay">
+          <div class="work-card-cat">商業廣告 · 平面</div>
+        </div>
+      </div>
+      <div class="work-card-info">
+        <div class="work-card-num">03</div>
+        <div>
+          <div class="work-card-name">季節限定活動</div>
+          <div class="work-card-name-en">Seasonal Campaign</div>
+          <div class="work-card-client">客戶 Client — 客戶 C</div>
+        </div>
+      </div>
+    </div>
+    <div class="work-card reveal">
+      <div class="work-card-img">
+        <div class="work-card-placeholder">
+          <div class="ph-icon">🖼</div>
+          <div class="ph-text">上傳圖片</div>
+        </div>
+        <div class="work-card-overlay">
+          <div class="work-card-cat">商業廣告 · 影像</div>
+        </div>
+      </div>
+      <div class="work-card-info">
+        <div class="work-card-num">04</div>
+        <div>
+          <div class="work-card-name">企業形象影片</div>
+          <div class="work-card-name-en">Corporate Film</div>
+          <div class="work-card-client">客戶 Client — 客戶 D</div>
+        </div>
+      </div>
+    </div>
+    <div class="work-card reveal">
+      <div class="work-card-img">
+        <div class="work-card-placeholder">
+          <div class="ph-icon">🖼</div>
+          <div class="ph-text">上傳圖片</div>
+        </div>
+        <div class="work-card-overlay">
+          <div class="work-card-cat">商業廣告 · 數位</div>
+        </div>
+      </div>
+      <div class="work-card-info">
+        <div class="work-card-num">05</div>
+        <div>
+          <div class="work-card-name">社群媒體廣告</div>
+          <div class="work-card-name-en">Social Media Ad</div>
+          <div class="work-card-client">客戶 Client — 客戶 E</div>
+        </div>
+      </div>
+    </div>
+    <div class="work-card reveal">
+      <div class="work-card-img">
+        <div class="work-card-placeholder">
+          <div class="ph-icon">🖼</div>
+          <div class="ph-text">上傳圖片</div>
+        </div>
+        <div class="work-card-overlay">
+          <div class="work-card-cat">商業廣告 · 大型印刷</div>
+        </div>
+      </div>
+      <div class="work-card-info">
+        <div class="work-card-num">06</div>
+        <div>
+          <div class="work-card-name">戶外廣告設計</div>
+          <div class="work-card-name-en">Outdoor Advertising</div>
+          <div class="work-card-client">客戶 Client — 客戶 F</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="cat-nav">
+  <span></span>
+  <a href="index.html" style="font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:rgba(245,240,232,0.35);text-decoration:none;">所有分類 All Categories</a>
+  <a href="graphic.html" class="nav-btn">平面 Graphic →</a>
+</div>
+
+<footer>
+  <div class="footer-logo">cococo<span>.</span>image</div>
+  <div>© 2025 Cococo.image. All rights reserved.</div>
+  <div>Creative Design Studio · Taiwan</div>
+</footer>
+<script src="../main.js"></script>
+</body>
+</html>

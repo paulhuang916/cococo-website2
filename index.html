@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cococo.image — Creative Design Studio</title>
+<link rel="stylesheet" href="style.css">
+<style>
+/* === HOME-SPECIFIC === */
+#hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 0 48px 80px;
+  position: relative;
+  overflow: hidden;
+}
+.hero-bg {
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse at 70% 30%, rgba(255,77,28,0.13) 0%, transparent 60%),
+              radial-gradient(ellipse at 20% 80%, rgba(255,224,51,0.07) 0%, transparent 50%);
+}
+.hero-grid {
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(rgba(245,240,232,0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(245,240,232,0.025) 1px, transparent 1px);
+  background-size: 80px 80px;
+}
+.hero-number {
+  position: absolute;
+  top: 50%; right: -80px;
+  transform: translateY(-50%);
+  font-family: var(--font-display);
+  font-size: clamp(280px, 38vw, 480px);
+  color: rgba(255,77,28,0.05);
+  line-height: 1;
+  pointer-events: none;
+  user-select: none;
+}
+.hero-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255,77,28,0.12);
+  border: 1px solid rgba(255,77,28,0.28);
+  color: var(--accent);
+  font-size: 11px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  padding: 8px 16px;
+  border-radius: 100px;
+  margin-bottom: 28px;
+  width: fit-content;
+  animation: fadeUp 1s 0.2s both;
+}
+.hero-tag::before { content: ''; width: 6px; height: 6px; background: var(--accent); border-radius: 50%; animation: pulse 2s infinite; }
+@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
+.hero-title {
+  font-family: var(--font-display);
+  font-size: clamp(72px, 12vw, 158px);
+  line-height: 0.88;
+  letter-spacing: -0.02em;
+  animation: fadeUp 1s 0.4s both;
+}
+.hero-title .accent { color: var(--accent); }
+.hero-title .outline { -webkit-text-stroke: 1px rgba(245,240,232,0.25); color: transparent; }
+.hero-sub {
+  margin-top: 40px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  animation: fadeUp 1s 0.6s both;
+}
+.hero-desc { max-width: 380px; font-size: 15px; line-height: 1.9; color: rgba(245,240,232,0.55); }
+.hero-cta {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  text-decoration: none;
+  color: var(--white);
+  font-size: 12px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  border-bottom: 1px solid var(--accent);
+  padding-bottom: 4px;
+  transition: gap 0.3s, color 0.3s;
+}
+.hero-cta:hover { gap: 22px; color: var(--accent); }
+.hero-cta::after { content: '→'; font-size: 17px; }
+@keyframes fadeUp { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: none; } }
+
+/* === ABOUT === */
+#about {
+  padding: 140px 48px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+.about-title { font-family: var(--font-serif); font-size: clamp(34px, 4vw, 54px); line-height: 1.2; margin-bottom: 28px; }
+.about-title em { color: var(--accent); font-style: italic; }
+.about-text { font-size: 15px; line-height: 2; color: rgba(245,240,232,0.55); margin-bottom: 18px; }
+.about-stats { display: grid; grid-template-columns: repeat(3,1fr); gap: 28px; margin-top: 52px; }
+.stat-num { font-family: var(--font-display); font-size: 52px; line-height: 1; color: var(--accent); }
+.stat-label { font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(245,240,232,0.45); margin-top: 6px; }
+.about-visual { position: relative; height: 500px; }
+.about-card { position: absolute; border-radius: 16px; overflow: hidden; }
+.about-card.large {
+  width: 74%; height: 73%;
+  top: 0; right: 0;
+  background: linear-gradient(135deg, rgba(255,77,28,0.18), rgba(255,224,51,0.12));
+  border: 1px solid rgba(255,77,28,0.18);
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-display); font-size: 100px; color: rgba(255,77,28,0.12);
+}
+.about-card.small {
+  width: 50%; height: 44%;
+  bottom: 0; left: 0;
+  background: var(--mid);
+  border: 1px solid rgba(245,240,232,0.07);
+  padding: 28px;
+  display: flex; flex-direction: column; justify-content: flex-end;
+}
+.about-card.small .card-title { font-family: var(--font-serif); font-size: 21px; font-style: italic; margin-bottom: 8px; }
+.about-card.small .card-sub { font-size: 12px; color: var(--muted); letter-spacing: 0.1em; }
+
+/* === SERVICES === */
+#services { padding: 100px 48px; background: var(--mid); }
+.services-header {
+  display: flex; align-items: flex-end; justify-content: space-between;
+  margin-bottom: 72px; max-width: 1400px; margin-left: auto; margin-right: auto;
+}
+.services-title { font-family: var(--font-display); font-size: clamp(52px, 7vw, 92px); line-height: 0.88; }
+.services-title span { color: var(--accent); }
+.services-intro { max-width: 280px; font-size: 14px; line-height: 1.8; color: rgba(245,240,232,0.45); padding-bottom: 6px; }
+.services-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 2px; max-width: 1400px; margin: 0 auto; }
+.service-card {
+  background: var(--black);
+  padding: 44px 36px;
+  position: relative;
+  overflow: hidden;
+  transition: background 0.4s;
+  cursor: none;
+}
+.service-card::before {
+  content: ''; position: absolute; bottom: 0; left: 0;
+  width: 100%; height: 3px;
+  background: var(--accent);
+  transform: scaleX(0); transform-origin: left; transition: transform 0.4s;
+}
+.service-card:hover { background: #131313; }
+.service-card:hover::before { transform: scaleX(1); }
+.service-num { font-family: var(--font-display); font-size: 68px; color: rgba(255,77,28,0.1); line-height: 1; margin-bottom: 20px; transition: color 0.4s; }
+.service-card:hover .service-num { color: rgba(255,77,28,0.22); }
+.service-name { font-family: var(--font-serif); font-size: 24px; font-style: italic; margin-bottom: 12px; }
+.service-name-en { font-size: 10px; letter-spacing: 0.28em; text-transform: uppercase; color: var(--accent); margin-bottom: 18px; }
+.service-desc { font-size: 14px; line-height: 1.85; color: rgba(245,240,232,0.48); }
+
+/* === WORKS PREVIEW === */
+#works { padding: 140px 48px; max-width: 1400px; margin: 0 auto; }
+.works-header { margin-bottom: 72px; }
+.works-title { font-family: var(--font-display); font-size: clamp(52px, 7vw, 92px); line-height: 0.88; }
+.works-title span { color: var(--accent); }
+.works-cats {
+  display: grid;
+  grid-template-columns: repeat(5,1fr);
+  gap: 12px;
+  margin-top: 12px;
+}
+.work-cat-card {
+  display: block;
+  text-decoration: none;
+  background: var(--mid);
+  border: 1px solid rgba(245,240,232,0.07);
+  border-radius: 14px;
+  padding: 40px 28px;
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.35s, background 0.35s, transform 0.35s;
+  cursor: none;
+}
+.work-cat-card::after {
+  content: '→';
+  position: absolute;
+  bottom: 24px; right: 24px;
+  font-size: 20px;
+  color: var(--accent);
+  opacity: 0;
+  transform: translateX(-8px);
+  transition: opacity 0.3s, transform 0.3s;
+}
+.work-cat-card:hover { border-color: var(--accent); background: #161616; transform: translateY(-4px); }
+.work-cat-card:hover::after { opacity: 1; transform: none; }
+.cat-num { font-family: var(--font-display); font-size: 52px; color: rgba(255,77,28,0.1); line-height: 1; margin-bottom: 20px; transition: color 0.3s; }
+.work-cat-card:hover .cat-num { color: rgba(255,77,28,0.22); }
+.cat-name { font-family: var(--font-serif); font-size: 22px; font-style: italic; margin-bottom: 6px; }
+.cat-name-en { font-size: 10px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--accent); }
+
+/* === CONTACT === */
+#contact { padding: 120px 48px; background: var(--mid); text-align: center; }
+.contact-inner { max-width: 680px; margin: 0 auto; }
+.contact-title { font-family: var(--font-display); font-size: clamp(52px, 8vw, 108px); line-height: 0.88; margin-bottom: 28px; }
+.contact-title span { color: var(--accent); }
+.contact-text { font-size: 15px; line-height: 1.9; color: rgba(245,240,232,0.52); margin-bottom: 52px; }
+.contact-links { display: flex; flex-direction: column; gap: 14px; align-items: center; margin-bottom: 52px; }
+.contact-link {
+  display: flex; align-items: center; gap: 14px;
+  font-size: 15px; color: var(--white); text-decoration: none;
+  padding: 18px 40px;
+  border: 1px solid rgba(245,240,232,0.1);
+  border-radius: 100px;
+  width: 100%; max-width: 380px; justify-content: center;
+  transition: border-color 0.3s, background 0.3s, color 0.3s;
+  letter-spacing: 0.05em;
+}
+.contact-link:hover { border-color: var(--accent); background: rgba(255,77,28,0.08); color: var(--accent); }
+.contact-btn {
+  display: inline-flex; align-items: center; gap: 10px;
+  background: var(--accent); color: var(--white); text-decoration: none;
+  font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase;
+  padding: 18px 44px; border-radius: 100px;
+  transition: background 0.3s, transform 0.3s;
+}
+.contact-btn:hover { background: #ff6b3d; transform: scale(1.03); }
+
+@media (max-width: 900px) {
+  #hero, #about, #services, #works, #contact { padding-left: 24px; padding-right: 24px; }
+  #about { grid-template-columns: 1fr; }
+  .about-visual { height: 260px; }
+  .services-grid, .works-cats { grid-template-columns: 1fr 1fr; }
+  .services-header { flex-direction: column; align-items: flex-start; gap: 20px; }
+  .hero-sub { flex-direction: column; align-items: flex-start; gap: 28px; }
+}
+@media (max-width: 560px) {
+  .services-grid, .works-cats { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+<div class="cursor" id="cursor"></div>
+
+<nav>
+  <a href="index.html" class="logo">cococo<span>.</span>image</a>
+  <ul>
+    <li><a href="#about">關於 About</a></li>
+    <li><a href="#services">服務 Services</a></li>
+    <li class="nav-works-toggle">
+      <a href="works/index.html">作品 Works ▾</a>
+      <div class="dropdown">
+        <a href="works/advertising.html">廣告 Advertising</a>
+        <a href="works/graphic.html">平面 Graphic</a>
+        <a href="works/documentary.html">紀實 Documentary</a>
+        <a href="works/branding.html">品牌 Branding</a>
+        <a href="works/product.html">產品 Product</a>
+      </div>
+    </li>
+    <li><a href="#contact">聯絡 Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-number">C</div>
+  <div class="hero-tag">Creative Design Studio · 台灣</div>
+  <h1 class="hero-title">
+    <span class="accent">COCO</span><br>
+    <span class="outline">CO.</span><br>
+    IMAGE
+  </h1>
+  <div class="hero-sub">
+    <p class="hero-desc">創意無限，設計改變世界。<br>We craft bold visuals that make brands unforgettable.</p>
+    <a href="works/index.html" class="hero-cta">探索作品 View Works</a>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-wrap">
+  <div class="marquee-track">
+    <div class="marquee-item"><span class="marquee-dot"></span>商業廣告</div>
+    <div class="marquee-item"><span class="marquee-dot"></span>Brand Identity</div>
+    <div class="marquee-item"><span class="marquee-dot"></span>平面設計</div>
+    <div class="marquee-item"><span class="marquee-dot"></span>Visual Design</div>
+    <div class="marquee-item"><span class="marquee-dot"></span>插圖設計</div>
+    <div class="marquee-item"><span class="marquee-dot"></span>Illustration</div>
+    <div class="marquee-item"><span class="marquee-dot"></span>產品設計</div>
+    <div class="marquee-item"><span class="marquee-dot"></span>Product Design</div>
+    <div class="marquee-item"><span class="marquee-dot"></span>紀實影像</div>
+    <div class="marquee-item"><span class="marquee-dot"></span>Documentary</div>
+    <div class="marquee-item"><span class="marquee-dot"></span>商業廣告</div>
+    <div class="marquee-item"><span class="marquee-dot"></span>Brand Identity</div>
+    <div class="marquee-item"><span class="marquee-dot"></span>平面設計</div>
+    <div class="marquee-item"><span class="marquee-dot"></span>Visual Design</div>
+    <div class="marquee-item"><span class="marquee-dot"></span>插圖設計</div>
+    <div class="marquee-item"><span class="marquee-dot"></span>Illustration</div>
+    <div class="marquee-item"><span class="marquee-dot"></span>產品設計</div>
+    <div class="marquee-item"><span class="marquee-dot"></span>Product Design</div>
+    <div class="marquee-item"><span class="marquee-dot"></span>紀實影像</div>
+    <div class="marquee-item"><span class="marquee-dot"></span>Documentary</div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="reveal">
+    <div class="section-label">關於我們 About Us</div>
+    <h2 class="about-title">We believe<br><em>creativity</em><br>changes the world.</h2>
+    <p class="about-text">Cococo.image 是一家提供創意設計服務的公司，由多位經驗豐富的專業人士組成。我們專注於商業廣告、平面設計、訂製影像及視覺設計、插圖和產品設計等領域。</p>
+    <p class="about-text">我們相信每一個品牌都有其獨特的故事。無論您是初創企業還是成熟品牌，我們都期待與您合作，共同創造卓越的設計作品。</p>
+    <div class="about-stats">
+      <div><div class="stat-num">5+</div><div class="stat-label">Years Experience</div></div>
+      <div><div class="stat-num">80+</div><div class="stat-label">Projects Done</div></div>
+      <div><div class="stat-num">100%</div><div class="stat-label">Satisfaction</div></div>
+    </div>
+  </div>
+  <div class="about-visual reveal">
+    <div class="about-card large">C</div>
+    <div class="about-card small">
+      <div class="card-title">Design that speaks</div>
+      <div class="card-sub">Cococo.image Studio · Since 2020</div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="services-header reveal">
+    <h2 class="services-title">OUR<br><span>SERVICES</span><br>服務項目</h2>
+    <p class="services-intro">每一項服務都以創意為核心，為您的品牌打造獨特的視覺語言。</p>
+  </div>
+  <div class="services-grid">
+    <div class="service-card reveal"><div class="service-num">01</div><div class="service-name">商業廣告</div><div class="service-name-en">Commercial Advertising</div><p class="service-desc">打造具有視覺衝擊力的廣告作品，提升品牌知名度與市場競爭力。</p></div>
+    <div class="service-card reveal"><div class="service-num">02</div><div class="service-name">平面設計</div><div class="service-name-en">Graphic Design</div><p class="service-desc">涵蓋名片、海報及企業形象設計，確保每一細節都能傳達品牌核心價值。</p></div>
+    <div class="service-card reveal"><div class="service-num">03</div><div class="service-name">訂製影像設計</div><div class="service-name-en">Custom Visual Design</div><p class="service-desc">根據客戶需求量身打造高質量視覺內容，提供令人印象深刻的影像解決方案。</p></div>
+    <div class="service-card reveal"><div class="service-num">04</div><div class="service-name">插圖設計</div><div class="service-name-en">Illustration</div><p class="service-desc">從書籍插圖到數位插圖，為您的品牌創作充滿個性的視覺作品。</p></div>
+    <div class="service-card reveal"><div class="service-num">05</div><div class="service-name">產品設計</div><div class="service-name-en">Product Design</div><p class="service-desc">結合美學與功能性，為您的產品打造兼具設計感與實用性的外觀。</p></div>
+    <div class="service-card reveal"><div class="service-num">06</div><div class="service-name">品牌形象</div><div class="service-name-en">Brand Identity</div><p class="service-desc">從 Logo 到完整視覺識別系統，建立一致且有力的品牌形象。</p></div>
+  </div>
+</section>
+
+<!-- WORKS PREVIEW -->
+<section id="works">
+  <div class="works-header reveal">
+    <div class="section-label">精選作品 Selected Works</div>
+    <h2 class="works-title">OUR<br><span>WORKS</span></h2>
+  </div>
+  <div class="works-cats reveal">
+    <a href="works/advertising.html" class="work-cat-card"><div class="cat-num">01</div><div class="cat-name">廣告</div><div class="cat-name-en">Advertising</div></a>
+    <a href="works/graphic.html" class="work-cat-card"><div class="cat-num">02</div><div class="cat-name">平面</div><div class="cat-name-en">Graphic</div></a>
+    <a href="works/documentary.html" class="work-cat-card"><div class="cat-num">03</div><div class="cat-name">紀實</div><div class="cat-name-en">Documentary</div></a>
+    <a href="works/branding.html" class="work-cat-card"><div class="cat-num">04</div><div class="cat-name">品牌</div><div class="cat-name-en">Branding</div></a>
+    <a href="works/product.html" class="work-cat-card"><div class="cat-num">05</div><div class="cat-name">產品</div><div class="cat-name-en">Product</div></a>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-inner">
+    <div class="section-label" style="justify-content:center">聯絡我們 Contact</div>
+    <h2 class="contact-title reveal">LET'S<br><span>CREATE</span><br>TOGETHER</h2>
+    <p class="contact-text reveal">無論您是初創企業還是成熟品牌，<br>我們都期待與您合作，共同創造卓越的設計作品。</p>
+    <div class="contact-links reveal">
+      <a href="mailto:hello@cococo.image" class="contact-link">✉ hello@cococo.image</a>
+      <a href="https://instagram.com/cococo.image" class="contact-link" target="_blank">◎ @cococo.image</a>
+    </div>
+    <a href="mailto:hello@cococo.image" class="contact-btn reveal">開始合作 Start a Project →</a>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-logo">cococo<span>.</span>image</div>
+  <div>© 2025 Cococo.image. All rights reserved.</div>
+  <div>Creative Design Studio · Taiwan</div>
+</footer>
+
+<script src="main.js"></script>
+</body>
+</html>

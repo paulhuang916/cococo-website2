@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>作品集 Works — Cococo.image</title>
+<link rel="stylesheet" href="../style.css">
+<style>
+.works-overview { padding: 60px 48px 120px; max-width: 1400px; margin: 0 auto; }
+.cats-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; }
+.cat-hero {
+  display: block; text-decoration: none;
+  border-radius: 16px;
+  background: var(--mid);
+  border: 1px solid rgba(245,240,232,0.07);
+  overflow: hidden;
+  position: relative;
+  min-height: 280px;
+  transition: border-color 0.35s, transform 0.4s;
+  cursor: none;
+}
+.cat-hero:nth-child(1) { grid-column: 1/3; min-height: 320px; }
+.cat-hero:nth-child(2) { grid-column: 3/4; }
+.cat-hero:nth-child(3), .cat-hero:nth-child(4) { min-height: 260px; }
+.cat-hero:nth-child(5) { grid-column: 1/4; min-height: 220px; }
+.cat-hero:hover { border-color: var(--accent); transform: translateY(-4px); }
+.cat-bg {
+  position: absolute; inset: 0;
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-display);
+  font-size: 180px;
+  transition: transform 0.6s cubic-bezier(0.23,1,0.32,1), opacity 0.4s;
+  opacity: 0.08;
+}
+.cat-hero:hover .cat-bg { transform: scale(1.05); opacity: 0.14; }
+.cat-hero:nth-child(1) .cat-bg { background: linear-gradient(135deg,#1a0806,#3a1008); color: #ff4d1c; }
+.cat-hero:nth-child(2) .cat-bg { background: linear-gradient(135deg,#0a0a1a,#12122e); color: #5566ff; }
+.cat-hero:nth-child(3) .cat-bg { background: linear-gradient(135deg,#0a1a0a,#123512); color: #33cc66; }
+.cat-hero:nth-child(4) .cat-bg { background: linear-gradient(135deg,#1a1a0a,#353512); color: #ffe033; }
+.cat-hero:nth-child(5) .cat-bg { background: linear-gradient(135deg,#1a0a18,#350f30); color: #cc44cc; }
+.cat-info {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  padding: 28px 32px;
+  background: linear-gradient(to top, rgba(10,10,10,0.95) 0%, transparent 100%);
+}
+.cat-label { font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--accent); margin-bottom: 8px; }
+.cat-title { font-family: var(--font-serif); font-size: 28px; font-style: italic; margin-bottom: 4px; }
+.cat-title-en { font-family: var(--font-display); font-size: 13px; letter-spacing: 0.2em; color: rgba(245,240,232,0.45); }
+.cat-arrow {
+  position: absolute; top: 24px; right: 24px;
+  width: 36px; height: 36px;
+  border: 1px solid rgba(245,240,232,0.15);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 16px; color: rgba(245,240,232,0.4);
+  transition: border-color 0.3s, color 0.3s, background 0.3s;
+}
+.cat-hero:hover .cat-arrow { border-color: var(--accent); color: var(--accent); background: rgba(255,77,28,0.1); }
+
+@media (max-width: 900px) {
+  .works-overview { padding: 40px 24px 80px; }
+  .cats-grid { grid-template-columns: 1fr 1fr; }
+  .cat-hero:nth-child(1), .cat-hero:nth-child(5) { grid-column: 1/3; }
+  .cat-hero:nth-child(2) { grid-column: auto; }
+}
+@media (max-width: 560px) {
+  .cats-grid { grid-template-columns: 1fr; }
+  .cat-hero:nth-child(1), .cat-hero:nth-child(5), .cat-hero:nth-child(2) { grid-column: 1; }
+}
+</style>
+</head>
+<body>
+<div class="cursor" id="cursor"></div>
+
+<nav>
+  <a href="../index.html" class="logo">cococo<span>.</span>image</a>
+  <ul>
+    <li><a href="../index.html#about">關於 About</a></li>
+    <li><a href="../index.html#services">服務 Services</a></li>
+    <li class="nav-works-toggle">
+      <a href="index.html" class="active">作品 Works ▾</a>
+      <div class="dropdown">
+        <a href="advertising.html">廣告 Advertising</a>
+        <a href="graphic.html">平面 Graphic</a>
+        <a href="documentary.html">紀實 Documentary</a>
+        <a href="branding.html">品牌 Branding</a>
+        <a href="product.html">產品 Product</a>
+      </div>
+    </li>
+    <li><a href="../index.html#contact">聯絡 Contact</a></li>
+  </ul>
+</nav>
+
+<div class="page-header">
+  <div class="page-header-bg"></div>
+  <div class="page-header-grid"></div>
+  <div class="page-label">精選作品 Selected Works</div>
+  <h1 class="page-title">OUR<br><span>WORKS</span></h1>
+  <p class="page-subtitle">探索我們橫跨廣告、平面、紀實、品牌與產品設計的創意作品集。</p>
+</div>
+
+<div class="marquee-wrap">
+  <div class="marquee-track">
+    <div class="marquee-item"><span class="marquee-dot"></span>廣告 Advertising</div>
+    <div class="marquee-item"><span class="marquee-dot"></span>平面 Graphic</div>
+    <div class="marquee-item"><span class="marquee-dot"></span>紀實 Documentary</div>
+    <div class="marquee-item"><span class="marquee-dot"></span>品牌 Branding</div>
+    <div class="marquee-item"><span class="marquee-dot"></span>產品 Product</div>
+    <div class="marquee-item"><span class="marquee-dot"></span>廣告 Advertising</div>
+    <div class="marquee-item"><span class="marquee-dot"></span>平面 Graphic</div>
+    <div class="marquee-item"><span class="marquee-dot"></span>紀實 Documentary</div>
+    <div class="marquee-item"><span class="marquee-dot"></span>品牌 Branding</div>
+    <div class="marquee-item"><span class="marquee-dot"></span>產品 Product</div>
+  </div>
+</div>
+
+<section class="works-overview">
+  <div class="cats-grid reveal">
+    <a href="advertising.html" class="cat-hero">
+      <div class="cat-bg">◆</div>
+      <div class="cat-arrow">→</div>
+      <div class="cat-info">
+        <div class="cat-label">01 · Category</div>
+        <div class="cat-title">廣告</div>
+        <div class="cat-title-en">Advertising</div>
+      </div>
+    </a>
+    <a href="graphic.html" class="cat-hero">
+      <div class="cat-bg">●</div>
+      <div class="cat-arrow">→</div>
+      <div class="cat-info">
+        <div class="cat-label">02 · Category</div>
+        <div class="cat-title">平面</div>
+        <div class="cat-title-en">Graphic Design</div>
+      </div>
+    </a>
+    <a href="documentary.html" class="cat-hero">
+      <div class="cat-bg">▲</div>
+      <div class="cat-arrow">→</div>
+      <div class="cat-info">
+        <div class="cat-label">03 · Category</div>
+        <div class="cat-title">紀實</div>
+        <div class="cat-title-en">Documentary</div>
+      </div>
+    </a>
+    <a href="branding.html" class="cat-hero">
+      <div class="cat-bg">■</div>
+      <div class="cat-arrow">→</div>
+      <div class="cat-info">
+        <div class="cat-label">04 · Category</div>
+        <div class="cat-title">品牌</div>
+        <div class="cat-title-en">Branding</div>
+      </div>
+    </a>
+    <a href="product.html" class="cat-hero">
+      <div class="cat-bg">★</div>
+      <div class="cat-arrow">→</div>
+      <div class="cat-info">
+        <div class="cat-label">05 · Category</div>
+        <div class="cat-title">產品</div>
+        <div class="cat-title-en">Product Design</div>
+      </div>
+    </a>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-logo">cococo<span>.</span>image</div>
+  <div>© 2025 Cococo.image. All rights reserved.</div>
+  <div>Creative Design Studio · Taiwan</div>
+</footer>
+<script src="../main.js"></script>
+</body>
+</html>
